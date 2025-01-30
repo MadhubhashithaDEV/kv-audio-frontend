@@ -12,7 +12,7 @@ const [password,setPassword] = useState("")
 
 const navigate = useNavigate()
 
-
+/
 function handleOnSubmit(e){
       e.preventDefault()
       console.log(email,password)
