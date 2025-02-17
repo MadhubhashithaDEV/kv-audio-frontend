@@ -12,7 +12,7 @@ const [password,setPassword] = useState("")
 
 const navigate = useNavigate()
 
-/
+
 function handleOnSubmit(e){
       e.preventDefault()
       console.log(email,password)
@@ -26,6 +26,7 @@ function handleOnSubmit(e){
 
             toast.success("login success")
             console.log(res)
+            localStorage.setItem("token",res.data.token)
 
 
             const user = res.data.user
