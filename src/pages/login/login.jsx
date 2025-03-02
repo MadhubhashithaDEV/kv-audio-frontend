@@ -16,7 +16,9 @@ const navigate = useNavigate()
 function handleOnSubmit(e){
       e.preventDefault()
       console.log(email,password)
-
+      //const backendUrl = import.meta.env.VITE_BACKEND_URL
+      //${backendUrl}
+      
       axios.post("http://localhost:3000/api/users/login",
             {
                   email : email,

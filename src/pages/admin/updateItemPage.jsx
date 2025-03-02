@@ -24,6 +24,7 @@ export default function UpdateItemPage() {
 
       if(token){
         try{
+          //`${import.meta.env.VITE_API_URL}/api/products/${productKey}`
         const result = await axios.put("http://localhost:3000/api/products/"+ productKey,
         {
           key : productKey,
@@ -109,7 +110,7 @@ export default function UpdateItemPage() {
          Update
         </button>
         <button  onClick={()=>{navigate("/admin/items")}}  className="w-full p=2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-          Cancel
+         Cancel
         </button>
       </div>
     </div>

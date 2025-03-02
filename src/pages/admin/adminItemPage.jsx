@@ -48,57 +48,68 @@ export default function AdminItemsPage() {
     });
     }
   };
-
   return (
-    <div className=" w-ful h-full p-4 flex flex-col  items-center  bg-gray-100">
-      {!itemsLoaded&&<div className="border-4 my-4 border-b-green-700 border-b flex justify-center items-center rounded-full  animate-spin w-[100px] h-[100px]"></div>}
-      {itemsLoaded&&<div className="overflow-x-auto">
-        <table className="w-full border border-gray-300 shadow-md bg-white rounded-lg">
-          <thead>
-            <tr className="bg-gray-800 text-white text-left">
-              <th className="p-3">Key</th>
-              <th className="p-3">Name</th>
-              <th className="p-3">Price</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Dimensions</th>
-              <th className="p-3">Availability</th>
-              <th className="p-3 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.key} className="border-b border-gray-200 hover:bg-gray-100">
-                <td className="p-3">{item.key}</td>
-                <td className="p-3">{item.name}</td>
-                <td className="p-3">${item.price}</td>
-                <td className="p-3">{item.category}</td>
-                <td className="p-3">{item.dimensions}</td>
-                <td className="p-3 text-green-600 font-semibold">
-                  {item.availability ? "Available" : "Not Available"}
-                </td>
-                <td className="p-3 flex justify-center gap-4">
-                  <button
-                    onClick={()=>{
-                      navigate(`/admin/items/edit`,{state:item})
-                    }}className="bg-blue-600 text-white hover:text-white px-3 py-1 rounded transition">
-                  
-                    <FaEdit className="inline mr-1"/>Edit
-                    </button>
-                  <button
-                    onClick={() => handleDelete(item.key)}
-                    className="bg-red-600 hover:text-white text-white px-3 py-1 rounded transition"
-                  >
-                    <FaTrashAlt className="inline mr-1" />Delete
-                  </button>
-                </td>
+    <div className="w-full h-full p-8 flex flex-col items-center bg-gradient-to-br from-gray-50 to-gray-100">
+      {!itemsLoaded && <div className="border-4 my-4 border-b-green-700 border-b flex justify-center items-center rounded-full animate-spin w-[100px] h-[100px]"></div>}
+      {itemsLoaded && (
+        <div className="overflow-x-auto w-full max-w-7xl rounded-xl shadow-2xl">
+          <table className="w-full border-collapse bg-white">
+            <thead>
+              <tr className="bg-gradient-to-r from-gray-800 to-gray-900">
+                <th className="p-4 text-left text-sm font-semibold text-gray-100 uppercase tracking-wider">Key</th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-100 uppercase tracking-wider">Name</th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-100 uppercase tracking-wider">Price</th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-100 uppercase tracking-wider">Category</th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-100 uppercase tracking-wider">Dimensions</th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-100 uppercase tracking-wider">Availability</th>
+                <th className="p-4 text-center text-sm font-semibold text-gray-100 uppercase tracking-wider">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>}
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {items.map((item) => (
+                <tr key={item.key} className="transition-all hover:bg-gray-50 hover:shadow-md">
+                  <td className="p-4 text-sm text-gray-700 font-medium">{item.key}</td>
+                  <td className="p-4 text-sm text-gray-700">{item.name}</td>
+                  <td className="p-4 text-sm text-gray-700 font-semibold">${item.price}</td>
+                  <td className="p-4 text-sm text-gray-700">{item.category}</td>
+                  <td className="p-4 text-sm text-gray-700">{item.dimensions}</td>
+                  <td className="p-4">
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      item.availability 
+                        ? "bg-green-100 text-green-800" 
+                        : "bg-red-100 text-red-800"
+                    }`}>
+                      {item.availability ? "Available" : "Not Available"}
+                    </span>
+                  </td>
+                  <td className="p-4">
+                    <div className="flex justify-center gap-3">
+                      <button
+                        onClick={() => navigate(`/admin/items/edit`, {state: item})}
+                        className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all transform hover:scale-105 shadow-md"
+                      >
+                        <FaEdit className="mr-2" />
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item.key)}
+                        className="flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all transform hover:scale-105 shadow-md"
+                      >
+                        <FaTrashAlt className="mr-2" />
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       <Link to="/admin/items/add">
-        <FaPlusCircle className="text-[50px] fixed right-10 bottom-10 text-gray-700 hover:text-yellow-300 cursor-pointer" />
+        <FaPlusCircle className="text-[60px] fixed right-12 bottom-12 text-gray-800 hover:text-yellow-500 transition-colors duration-300 transform hover:scale-110 cursor-pointer shadow-lg rounded-full" />
       </Link>
     </div>
   );
+  
 }
