@@ -9,7 +9,7 @@ export default function ProductCard({ item }) {
             </span>
           ) : (
             <span className="bg-red-100 text-red-600 text-sm font-medium px-4 py-2 rounded-full shadow-lg">
-              Out of Stock
+              Out of Stoc
             </span>
           )}
         </div>

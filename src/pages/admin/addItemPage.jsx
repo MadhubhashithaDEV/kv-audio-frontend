@@ -12,6 +12,7 @@ export default function AddItemPage() {
   const [productDescription, setProductDescription] = useState("");
   const navigate = useNavigate()
 
+
   async function handleAddItem(){
     console.log(productKey,productName,productPrice,productCategory,productDimensions,productDescription)
 
