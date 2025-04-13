@@ -2,7 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageSlider from "../../components/imageSlider";
+import { addToCart, loadCart } from "../../utils/cart";
 import toast from "react-hot-toast";
+
 
 export default function ProductOverview() {
 	const params = useParams();
