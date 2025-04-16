@@ -10,6 +10,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import VerifyEmail from "./pages/verifyEmail/verifyEmail";
 
 
+
 function App() {
   return (
     <GoogleOAuthProvider clientId="1065391884620-tjnst6pesm0qbqk0lbdecc6a09nqilu8.apps.googleusercontent.com">
