@@ -19,7 +19,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setIsLoading(true);
     
-    axios.post("http://localhost:3000/api/users", {
+    axios.post("http://localhost:3000/api/users/", {
       email: email,
       password: password,
       firstName: firstName,
@@ -33,8 +33,8 @@ export default function RegisterPage() {
       toast.error(err?.response?.data?.err || "Something Went Wrong, An Error Occurred");
     }).finally(() => {
       setIsLoading(false);
-    });
-  }
+    })
+  };
 
   return (
     <div className="login-container">

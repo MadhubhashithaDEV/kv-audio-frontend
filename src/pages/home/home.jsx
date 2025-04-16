@@ -117,52 +117,12 @@ export default function Home() {
 
         {/* Navigation */}
         <nav className="relative z-20 flex justify-between items-center w-full px-6 py-6 md:px-12">
-          <div className="flex items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl font-bold text-white"
-            >
-              KV Audio
-            </motion.div>
-          </div>
+         
           
           <div className="flex items-center space-x-4">
-            <motion.button
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-white hover:text-primary transition-colors"
-              onClick={() => scrollToSection(featuredRef)}
-            >
-              Products
-            </motion.button>
             
-            <motion.button
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-white hover:text-primary transition-colors"
-              onClick={() => scrollToSection(testimonialsRef)}
-            >
-              Testimonials
-            </motion.button>
             
-            <motion.button
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? (
-                <FaSun className="text-yellow-300 text-xl" />
-              ) : (
-                <FaMoon className="text-blue-300 text-xl" />
-              )}
-            </motion.button>
+          
           </div>
         </nav>
 

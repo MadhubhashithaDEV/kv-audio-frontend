@@ -1,2 +1,5 @@
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtieHlya21xemh4ZnV0Z3RmZGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIyOTk1NzcsImV4cCI6MjA1Nzg3NTU3N30.Nv9AWMAZow4hVOFKULgASioJSBbLm8vOz8mzZHE-H-0-annon key
 https://kbxyrkmqzhxfutgtfdcn.supabase.co-project url
+
+client-id = 1065391884620-tjnst6pesm0qbqk0lbdecc6a09nqilu8.apps.googleusercontent.com
+Client secret =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
