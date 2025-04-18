@@ -1,18 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import { 
-  ShoppingCart, 
-  Menu, 
-  LogOut, 
-  Home, 
-  Phone, 
-  Image as ImageIcon, 
-  Package,
-  Music,
-  ChevronDown,
-  User
-} from "lucide-react";
+import { ShoppingCart,Menu,LogOut,Home, Phone,Image as ImageIcon,Package,ChevronDown,User} from "lucide-react";
 import MobileNavPanel from "./mobileNavPanel";
 
 export default function Header() {

@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle, XCircle, Calendar, Mail, Clock, DollarSign, AlertCircle, Package, Loader2
-} from "lucide-react";
+import { X, CheckCircle, XCircle, Calendar, Mail, Clock, DollarSign, AlertCircle, Package, Loader2} from "lucide-react";
 
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);

@@ -1,600 +1,341 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
-  Box, 
-  Grid, 
-  Typography, 
-  Card, 
-  CardContent, 
-  Button, 
-  IconButton, 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Paper, 
-  Avatar, 
-  Divider,
-  CircularProgress,
-  LinearProgress,
-  useTheme,
-  Container
-} from '@mui/material';
-import { 
-  Dashboard as DashboardIcon, 
-  People as PeopleIcon, 
-  MusicNote as MusicNoteIcon, 
-  AttachMoney as AttachMoneyIcon,
-  TrendingUp as TrendingUpIcon,
-  Notifications as NotificationsIcon,
-  Settings as SettingsIcon,
-  ExitToApp as LogoutIcon,
-  MoreVert as MoreVertIcon
-} from '@mui/icons-material';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend, 
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell
-} from 'recharts';
+  BarChart3, 
+  Users, 
+  Package, 
+  ShoppingCart, 
+  DollarSign, 
+  Calendar, 
+  Bell, 
+  Settings, 
+  Search,
+  Menu,
+  X
+} from 'lucide-react';
 
 const AdminDashboard = () => {
-  const theme = useTheme();
-  const [loading, setLoading] = useState(true);
-  
-  // Sample data - replace with actual API calls
-  const [stats, setStats] = useState({
-    totalUsers: 0,
-    totalTracks: 0,
-    totalRevenue: 0,
-    newUsers: 0
-  });
-  
-  const [recentUsers, setRecentUsers] = useState([]);
-  const [recentTracks, setRecentTracks] = useState([]);
-  
-  useEffect(() => {
-    // Simulate API calls
-    setTimeout(() => {
-      setStats({
-        totalUsers: 1245,
-        totalTracks: 842,
-        totalRevenue: 28650,
-        newUsers: 48
-      });
-      
-      setRecentUsers([
-        { id: 1, name: 'John Doe', email: 'john@example.com', joinDate: '2023-10-15', avatar: 'https://randomuser.me/api/portraits/men/1.jpg' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com', joinDate: '2023-10-14', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' },
-        { id: 3, name: 'Robert Johnson', email: 'robert@example.com', joinDate: '2023-10-13', avatar: 'https://randomuser.me/api/portraits/men/3.jpg' },
-        { id: 4, name: 'Emily Davis', email: 'emily@example.com', joinDate: '2023-10-12', avatar: 'https://randomuser.me/api/portraits/women/4.jpg' },
-      ]);
-      
-      setRecentTracks([
-        { id: 1, title: 'Summer Vibes', artist: 'DJ Sunshine', downloads: 245, revenue: 1225 },
-        { id: 2, title: 'Midnight Dreams', artist: 'Luna Echo', downloads: 189, revenue: 945 },
-        { id: 3, title: 'Urban Rhythm', artist: 'City Beats', downloads: 302, revenue: 1510 },
-        { id: 4, title: 'Ocean Waves', artist: 'Aqua Sound', downloads: 156, revenue: 780 },
-      ]);
-      
-      setLoading(false);
-    }, 1500);
-  }, []);
-  
-  // Chart data
-  const salesData = [
-    { name: 'Jan', sales: 4000 },
-    { name: 'Feb', sales: 3000 },
-    { name: 'Mar', sales: 5000 },
-    { name: 'Apr', sales: 2780 },
-    { name: 'May', sales: 1890 },
-    { name: 'Jun', sales: 2390 },
-    { name: 'Jul', sales: 3490 },
-    { name: 'Aug', sales: 4000 },
-    { name: 'Sep', sales: 3000 },
-    { name: 'Oct', sales: 2000 },
-    { name: 'Nov', sales: 2780 },
-    { name: 'Dec', sales: 3890 },
-  ];
-  
-  const pieData = [
-    { name: 'Hip Hop', value: 35 },
-    { name: 'Electronic', value: 25 },
-    { name: 'Rock', value: 20 },
-    { name: 'Pop', value: 15 },
-    { name: 'Other', value: 5 },
-  ];
-  
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
-  
-  if (loading) {
-    return (
-      <Box sx={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        height: '100vh' 
-      }}>
-        <CircularProgress size={60} />
-        <Typography variant="h6" sx={{ mt: 2 }}>
-          Loading Dashboard...
-        </Typography>
-      </Box>
-    );
-  }
-  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 100 }
+    }
+  };
+
   return (
-    <Container maxWidth="xl">
-      <Box sx={{ flexGrow: 1, py: 3 }}>
-        <Typography variant="h4" component="h1" gutterBottom fontWeight="bold">
-          Admin Dashboard
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-          Welcome back! Here's what's happening with your audio platform today.
-        </Typography>
-        
-        {/* Stats Cards */}
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                borderRadius: 2,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                transition: 'transform 0.3s',
-                '&:hover': { transform: 'translateY(-5px)' }
-              }}
+    <div className="flex h-screen bg-background dark:bg-primary text-primary dark:text-white">
+      {/* Mobile sidebar toggle */}
+      <button 
+        onClick={toggleSidebar}
+        className="fixed z-50 bottom-4 right-4 p-3 rounded-full bg-secondary text-white shadow-lg md:hidden"
+      >
+        {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {/* Sidebar */}
+      <div 
+        className={`${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0 fixed md:static inset-y-0 left-0 z-40 w-64 bg-white dark:bg-primary shadow-lg transition-transform duration-300 ease-in-out`}
+      >
+        <div className="flex flex-col h-full">
+          <div className="p-4 border-b border-muted dark:border-gray-700">
+            <h2 className="text-2xl font-bold text-secondary">KV Audio</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Admin Panel</p>
+          </div>
+
+          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+            <SidebarItem icon={<BarChart3 size={20} />} text="Dashboard" active />
+            <SidebarItem icon={<Users size={20} />} text="Users" />
+            <SidebarItem icon={<Package size={20} />} text="Products" />
+            <SidebarItem icon={<ShoppingCart size={20} />} text="Orders" />
+            <SidebarItem icon={<DollarSign size={20} />} text="Transactions" />
+            <SidebarItem icon={<Calendar size={20} />} text="Schedule" />
+            <SidebarItem icon={<Settings size={20} />} text="Settings" />
+          </nav>
+
+          <div className="p-4 border-t border-muted dark:border-gray-700">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white">
+                <span className="font-medium">AD</span>
+              </div>
+              <div>
+                <p className="font-medium">Admin User</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">admin@kvaudio.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <div className="flex-1 overflow-x-hidden overflow-y-auto">
+        {/* Header */}
+        <header className="bg-white dark:bg-primary shadow-sm border-b border-muted dark:border-gray-700 sticky top-0 z-30">
+          <div className="flex items-center justify-between p-4">
+            <h1 className="text-xl font-semibold md:text-2xl">Dashboard</h1>
+            
+            <div className="flex items-center space-x-4">
+              <div className="relative hidden md:block">
+                <input 
+                  type="text" 
+                  placeholder="Search..." 
+                  className="pl-10 pr-4 py-2 rounded-lg border border-muted dark:border-gray-700 bg-muted dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-secondary"
+                />
+                <Search size={18} className="absolute left-3 top-2.5 text-gray-500" />
+              </div>
+              
+              <button className="relative p-2 rounded-full hover:bg-muted dark:hover:bg-gray-800 transition-colors">
+                <Bell size={20} />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full"></span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* Dashboard content */}
+        <main className="p-4 md:p-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6"
+          >
+            {/* Stats overview */}
+            <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatCard 
+                title="Total Sales" 
+                value="$24,780" 
+                change="+12.5%" 
+                icon={<DollarSign className="text-green-500" />} 
+              />
+              <StatCard 
+                title="New Orders" 
+                value="184" 
+                change="+8.2%" 
+                icon={<ShoppingCart className="text-secondary" />} 
+              />
+              <StatCard 
+                title="New Users" 
+                value="48" 
+                change="+24.3%" 
+                icon={<Users className="text-accent" />} 
+              />
+              <StatCard 
+                title="Products" 
+                value="312" 
+                change="+3.7%" 
+                icon={<Package className="text-yellow-500" />} 
+              />
+            </motion.div>
+
+            {/* Recent activity and charts section */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <motion.div 
+                variants={itemVariants}
+                className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-muted dark:border-gray-700"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-lg font-semibold">Sales Overview</h2>
+                  <select className="p-2 rounded-md border border-muted dark:border-gray-700 bg-transparent text-sm">
+                    <option>Last 7 days</option>
+                    <option>Last 30 days</option>
+                    <option>Last 3 months</option>
+                  </select>
+                </div>
+                <div className="h-64 w-full bg-muted dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                  <p className="text-gray-500 dark:text-gray-400">Chart visualization goes here</p>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                variants={itemVariants}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-muted dark:border-gray-700"
+              >
+                <h2 className="text-lg font-semibold mb-4">Recent Activity</h2>
+                <div className="space-y-4">
+                  <ActivityItem 
+                    title="New order #KV-1234" 
+                    time="2 minutes ago" 
+                    description="John Doe purchased Audio Interface X3" 
+                  />
+                  <ActivityItem 
+                    title="Product update" 
+                    time="1 hour ago" 
+                    description="Inventory updated for Headphones Pro" 
+                  />
+                  <ActivityItem 
+                    title="New user registered" 
+                    time="3 hours ago" 
+                    description="Sarah Smith created an account" 
+                  />
+                  <ActivityItem 
+                    title="Payment received" 
+                    time="5 hours ago" 
+                    description="$1,200 payment for order #KV-1230" 
+                  />
+                </div>
+                <button className="mt-4 text-secondary hover:underline text-sm font-medium">
+                  View all activity
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Recent orders */}
+            <motion.div 
+              variants={itemVariants}
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-muted dark:border-gray-700"
             >
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Box>
-                    <Typography color="text.secondary" variant="subtitle2">
-                      Total Users
-                    </Typography>
-                    <Typography variant="h4" component="div" fontWeight="bold">
-                      {stats.totalUsers.toLocaleString()}
-                    </Typography>
-                    <Typography variant="body2" color="success.main" sx={{ display: 'flex', alignItems: 'center' }}>
-                      <TrendingUpIcon fontSize="small" sx={{ mr: 0.5 }} />
-                      +{stats.newUsers} this week
-                    </Typography>
-                  </Box>
-                  <Avatar sx={{ bgcolor: 'primary.main', width: 56, height: 56 }}>
-                    <PeopleIcon />
-                  </Avatar>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                borderRadius: 2,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                transition: 'transform 0.3s',
-                '&:hover': { transform: 'translateY(-5px)' }
-              }}
-            >
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Box>
-                    <Typography color="text.secondary" variant="subtitle2">
-                      Total Tracks
-                    </Typography>
-                    <Typography variant="h4" component="div" fontWeight="bold">
-                      {stats.totalTracks.toLocaleString()}
-                    </Typography>
-                    <Typography variant="body2" color="success.main" sx={{ display: 'flex', alignItems: 'center' }}>
-                      <TrendingUpIcon fontSize="small" sx={{ mr: 0.5 }} />
-                      +24 this week
-                    </Typography>
-                  </Box>
-                  <Avatar sx={{ bgcolor: 'secondary.main', width: 56, height: 56 }}>
-                    <MusicNoteIcon />
-                  </Avatar>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                borderRadius: 2,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                transition: 'transform 0.3s',
-                '&:hover': { transform: 'translateY(-5px)' }
-              }}
-            >
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Box>
-                    <Typography color="text.secondary" variant="subtitle2">
-                      Total Revenue
-                    </Typography>
-                    <Typography variant="h4" component="div" fontWeight="bold">
-                      ${stats.totalRevenue.toLocaleString()}
-                    </Typography>
-                    <Typography variant="body2" color="success.main" sx={{ display: 'flex', alignItems: 'center' }}>
-                      <TrendingUpIcon fontSize="small" sx={{ mr: 0.5 }} />
-                      +8.2% this month
-                    </Typography>
-                  </Box>
-                  <Avatar sx={{ bgcolor: 'success.main', width: 56, height: 56 }}>
-                    <AttachMoneyIcon />
-                  </Avatar>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} sm={6} md={3}>
-            <Card 
-              sx={{ 
-                borderRadius: 2,
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                transition: 'transform 0.3s',
-                '&:hover': { transform: 'translateY(-5px)' }
-              }}
-            >
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Box>
-                    <Typography color="text.secondary" variant="subtitle2">
-                      Active Users
-                    </Typography>
-                    <Typography variant="h4" component="div" fontWeight="bold">
-                      428
-                    </Typography>
-                    <Typography variant="body2" color="success.main" sx={{ display: 'flex', alignItems: 'center' }}>
-                      <TrendingUpIcon fontSize="small" sx={{ mr: 0.5 }} />
-                      +12% this week
-                    </Typography>
-                  </Box>
-                  <Avatar sx={{ bgcolor: 'warning.main', width: 56, height: 56 }}>
-                    <DashboardIcon />
-                  </Avatar>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-        
-        {/* Charts */}
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs={12} md={8}>
-            <Card sx={{ borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', height: '100%' }}>
-              <CardContent>
-                <Typography variant="h6" component="h2" gutterBottom fontWeight="bold">
-                  Revenue Overview
-                </Typography>
-                <Typography variant="body2" color="text.secondary" gutterBottom>
-                  Monthly revenue performance
-                </Typography>
-                <Box sx={{ height: 300, mt: 2 }}>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart
-                      data={salesData}
-                      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="sales" fill={theme.palette.primary.main} name="Revenue ($)" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} md={4}>
-            <Card sx={{ borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', height: '100%' }}>
-              <CardContent>
-                <Typography variant="h6" component="h2" gutterBottom fontWeight="bold">
-                  Genre Distribution
-                </Typography>
-                <Typography variant="body2" color="text.secondary" gutterBottom>
-                  Track genres by percentage
-                </Typography>
-                <Box sx={{ height: 300, mt: 2, display: 'flex', justifyContent: 'center' }}>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={pieData}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                      >
-                        {pieData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-        
-        {/* Recent Users and Tracks */}
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs={12} md={6}>
-            <Card sx={{ borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-                  <Typography variant="h6" component="h2" fontWeight="bold">
-                    Recent Users
-                  </Typography>
-                  <Button variant="outlined" size="small">
-                    View All
-                  </Button>
-                </Box>
-                <TableContainer component={Paper} elevation={0}>
-                  <Table sx={{ minWidth: 650 }} size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>User</TableCell>
-                        <TableCell>Email</TableCell>
-                        <TableCell>Join Date</TableCell>
-                        <TableCell>Actions</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {recentUsers.map((user) => (
-                        <TableRow key={user.id} hover>
-                          <TableCell>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                              <Avatar src={user.avatar} sx={{ mr: 2, width: 32, height: 32 }} />
-                              <Typography variant="body2">{user.name}</Typography>
-                            </Box>
-                          </TableCell>
-                          <TableCell>{user.email}</TableCell>
-                          <TableCell>{new Date(user.joinDate).toLocaleDateString()}</TableCell>
-                          <TableCell>
-                            <IconButton size="small">
-                              <MoreVertIcon fontSize="small" />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} md={6}>
-            <Card sx={{ borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <CardContent>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-                  <Typography variant="h6" component="h2" fontWeight="bold">
-                    Recent Tracks
-                  </Typography>
-                  <Button variant="outlined" size="small">
-                    View All
-                  </Button>
-                </Box>
-                <TableContainer component={Paper} elevation={0}>
-                  <Table sx={{ minWidth: 650 }} size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Title</TableCell>
-                        <TableCell>Artist</TableCell>
-                        <TableCell>Downloads</TableCell>
-                        <TableCell>Revenue</TableCell>
-                        <TableCell>Actions</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {recentTracks.map((track) => (
-                        <TableRow key={track.id} hover>
-                          <TableCell>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                              <Avatar variant="rounded" sx={{ mr: 2, width: 32, height: 32, bgcolor: 'primary.light' }}>
-                                <MusicNoteIcon fontSize="small" />
-                              </Avatar>
-                              <Typography variant="body2">{track.title}</Typography>
-                            </Box>
-                          </TableCell>
-                          <TableCell>{track.artist}</TableCell>
-                          <TableCell>{track.downloads}</TableCell>
-                          <TableCell>${track.revenue}</TableCell>
-                          <TableCell>
-                            <IconButton size="small">
-                              <MoreVertIcon fontSize="small" />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-        
-        {/* Quick Actions and Performance */}
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs={12} md={4}>
-            <Card sx={{ borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <CardContent>
-                <Typography variant="h6" component="h2" gutterBottom fontWeight="bold">
-                  Quick Actions
-                </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
-                  <Button variant="contained" startIcon={<MusicNoteIcon />}>
-                    Add New Track
-                  </Button>
-                  <Button variant="outlined" startIcon={<PeopleIcon />}>
-                    Manage Users
-                  </Button>
-                  <Button variant="outlined" startIcon={<AttachMoneyIcon />}>
-                    View Revenue Reports
-                  </Button>
-                  <Button variant="outlined" startIcon={<SettingsIcon />}>
-                    System Settings
-                  </Button>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-          
-          <Grid item xs={12} md={8}>
-            <Card sx={{ borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <CardContent>
-                <Typography variant="h6" component="h2" gutterBottom fontWeight="bold">
-                  System Performance
-                </Typography>
-                <Box sx={{ mt: 3 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography variant="body2">Server Load</Typography>
-                    <Typography variant="body2" color="text.secondary">68%</Typography>
-                  </Box>
-                  <LinearProgress variant="determinate" value={68} sx={{ mb: 2, height: 8, borderRadius: 4 }} />
-                  
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography variant="body2">Storage Usage</Typography>
-                    <Typography variant="body2" color="text.secondary">42%</Typography>
-                  </Box>
-                  <LinearProgress variant="determinate" value={42} sx={{ mb: 2, height: 8, borderRadius: 4 }} color="success" />
-                  
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography variant="body2">Bandwidth</Typography>
-                    <Typography variant="body2" color="text.secondary">89%</Typography>
-                  </Box>
-                  <LinearProgress variant="determinate" value={89} sx={{ mb: 2, height: 8, borderRadius: 4 }} color="warning" />
-                  
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography variant="body2">Memory Usage</Typography>
-                    <Typography variant="body2" color="text.secondary">35%</Typography>
-                  </Box>
-                  <LinearProgress variant="determinate" value={35} sx={{ mb: 2, height: 8, borderRadius: 4 }} color="info" />
-                </Box>
-                
-                <Divider sx={{ my: 2 }} />
-                
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="body2" color="text.secondary">
-                    Last updated: Today, 2:30 PM
-                  </Typography>
-                  <Button size="small">Refresh</Button>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-        
-        {/* Recent Activity */}
-        <Grid container spacing={3} sx={{ mt: 1 }}>
-          <Grid item xs={12}>
-            <Card sx={{ borderRadius: 2, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <CardContent>
-                <Typography variant="h6" component="h2" gutterBottom fontWeight="bold">
-                  Recent Activity
-                </Typography>
-                <Box sx={{ mt: 2 }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Avatar sx={{ bgcolor: 'primary.light', mr: 2 }}>
-                      <PeopleIcon fontSize="small" />
-                    </Avatar>
-                    <Box>
-                      <Typography variant="body2">
-                        <strong>New user registered:</strong> Jane Smith
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        Today, 10:30 AM
-                      </Typography>
-                    </Box>
-                  </Box>
-                  
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Avatar sx={{ bgcolor: 'success.light', mr: 2 }}>
-                      <AttachMoneyIcon fontSize="small" />
-                    </Avatar>
-                    <Box>
-                      <Typography variant="body2">
-                        <strong>Payment received:</strong> $125.00 from John Doe
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        Today, 9:15 AM
-                      </Typography>
-                    </Box>
-                  </Box>
-                  
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Avatar sx={{ bgcolor: 'secondary.light', mr: 2 }}>
-                      <MusicNoteIcon fontSize="small" />
-                    </Avatar>
-                    <Box>
-                      <Typography variant="body2">
-                        <strong>New track uploaded:</strong> "Summer Vibes" by DJ Sunshine
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        Yesterday, 4:45 PM
-                      </Typography>
-                    </Box>
-                  </Box>
-                  
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Avatar sx={{ bgcolor: 'warning.light', mr: 2 }}>
-                      <NotificationsIcon fontSize="small" />
-                    </Avatar>
-                    <Box>
-                      <Typography variant="body2">
-                        <strong>System alert:</strong> Storage space is running low
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        Yesterday, 2:30 PM
-                      </Typography>
-                    </Box>
-                  </Box>
-                  
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar sx={{ bgcolor: 'error.light', mr: 2 }}>
-                      <SettingsIcon fontSize="small" />
-                    </Avatar>
-                    <Box>
-                      <Typography variant="body2">
-                        <strong>System maintenance:</strong> Scheduled for tomorrow at 2:00 AM
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        Yesterday, 11:00 AM
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-                
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-                  <Button variant="text">View All Activity</Button>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-lg font-semibold">Recent Orders</h2>
+                <button className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                  View All
+                </button>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-muted dark:border-gray-700">
+                      <th className="text-left py-3 px-4 font-medium">Order ID</th>
+                      <th className="text-left py-3 px-4 font-medium">Customer</th>
+                      <th className="text-left py-3 px-4 font-medium">Product</th>
+                      <th className="text-left py-3 px-4 font-medium">Date</th>
+                      <th className="text-left py-3 px-4 font-medium">Amount</th>
+                      <th className="text-left py-3 px-4 font-medium">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <OrderRow 
+                      id="KV-1234" 
+                      customer="John Doe" 
+                      product="Audio Interface X3" 
+                      date="Oct 24, 2023" 
+                      amount="$599.99" 
+                      status="Completed" 
+                    />
+                    <OrderRow 
+                      id="KV-1233" 
+                      customer="Jane Smith" 
+                      product="Studio Monitors (Pair)" 
+                      date="Oct 23, 2023" 
+                      amount="$799.99" 
+                      status="Processing" 
+                    />
+                    <OrderRow 
+                      id="KV-1232" 
+                      customer="Robert Johnson" 
+                      product="Condenser Microphone" 
+                      date="Oct 22, 2023" 
+                      amount="$349.99" 
+                      status="Shipped" 
+                    />
+                    <OrderRow 
+                      id="KV-1231" 
+                      customer="Emily Davis" 
+                      product="Headphones Pro" 
+                      date="Oct 21, 2023" 
+                      amount="$249.99" 
+                      status="Completed" 
+                    />
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+          </motion.div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+// Component for sidebar items
+const SidebarItem = ({ icon, text, active }) => (
+  <div 
+    className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-colors ${
+      active 
+        ? 'bg-secondary bg-opacity-10 text-secondary' 
+        : 'hover:bg-muted dark:hover:bg-gray-800'
+    }`}
+  >
+    {icon}
+    <span className="font-medium">{text}</span>
+  </div>
+);
+
+// Component for stat cards
+const StatCard = ({ title, value, change, icon }) => (
+  <motion.div 
+    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-muted dark:border-gray-700"
+  >
+    <div className="flex justify-between items-start">
+      <div>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{title}</p>
+        <h3 className="text-2xl font-bold mt-1">{value}</h3>
+        <p className="text-sm text-green-500 mt-1">{change}</p>
+      </div>
+      <div className="p-3 rounded-full bg-muted dark:bg-gray-700">
+        {icon}
+      </div>
+    </div>
+  </motion.div>
+);
+
+// Component for activity items
+const ActivityItem = ({ title, time, description }) => (
+  <div className="border-l-2 border-muted dark:border-gray-700 pl-4 py-1">
+    <p className="font-medium">{title}</p>
+    <p className="text-xs text-gray-500 dark:text-gray-400">{time}</p>
+    <p className="text-sm mt-1">{description}</p>
+  </div>
+);
+
+// Component for order rows
+const OrderRow = ({ id, customer, product, date, amount, status }) => {
+  const getStatusColor = (status) => {
+    switch(status) {
+      case 'Completed': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
+      case 'Processing': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+      case 'Shipped': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
+      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+    }
+  };
+
+  return (
+    <tr className="border-b border-muted dark:border-gray-700 hover:bg-muted dark:hover:bg-gray-700 transition-colors">
+      <td className="py-3 px-4">{id}</td>
+      <td className="py-3 px-4">{customer}</td>
+      <td className="py-3 px-4">{product}</td>
+      <td className="py-3 px-4">{date}</td>
+      <td className="py-3 px-4 font-medium">{amount}</td>
+     
+      <td className="py-3 px-4">
+        <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(status)}`}>
+          {status}
+        </span>
+      </td>
+    </tr>
   );
 };
 
 export default AdminDashboard;
-

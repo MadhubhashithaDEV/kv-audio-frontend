@@ -8,6 +8,7 @@ import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { BarChart3, BookmarkIcon, SpeakerIcon, UserIcon, LogOut, Menu, X,Bell,Search} from "lucide-react";
+import AdminDashboard from "./adminDashboard";
 
 
 export default function AdminPage() {
@@ -99,10 +100,10 @@ export default function AdminPage() {
               {/* Navigation */}
               <nav className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto">
                 <NavItem 
-                  to="/admin" 
+                  to="/admin/dashboard" 
                   icon={<BarChart3 size={20} />} 
                   label="Dashboard" 
-                  isActive={location.pathname === "/dashboard"} 
+                  isActive={location.pathname === "/admin/dashboard"} 
                   delay={0.1}
                 />
                 <NavItem 
@@ -201,7 +202,7 @@ export default function AdminPage() {
                   <Route path="/items" element={<AdminItemsPage />} />    
                   <Route path="/items/add" element={<AddItemPage />} />
                   <Route path="/items/edit" element={<UpdateItemPage />} />
-                  <Route path="/dashboard" element={<AdminOrdersPage />} />
+                  <Route path="/admin/dashboard" element={<AdminDashboard/>} />
                 </Routes>
               )}
             </motion.div>
@@ -224,8 +225,8 @@ function NavItem({ to, icon, label, isActive, delay }) {
         to={to}
         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
           isActive 
-            ? "bg-gradient-to-r from-accent/10 to-secondary/10 text-secondary font-medium" 
-            : "text-gray-600 hover:bg-muted/50 hover:text-primary"
+            ? "bg-gradient-to-r from-indigo-600/20 to-purple-600/20 text-indigo-400 font-medium" 
+            : "text-gray-400 hover:bg-gray-700 hover:text-gray-200"
         }`}
       >
         <div className={`${isActive ? "text-secondary" : "text-gray-500"}`}>

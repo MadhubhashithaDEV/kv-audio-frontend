@@ -140,46 +140,7 @@ export default function MobileNavPanel({ isOpen, setOpen }) {
             ))}
           </motion.nav>
 
-          {/* Featured Categories */}
-          <motion.div 
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="mt-8"
-          >
-            <motion.h3 
-              variants={item}
-              className="text-blue-100 font-medium mb-3 px-2"
-            >
-              Featured Categories
-            </motion.h3>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { label: "Headphones", icon: <Headphones className="w-5 h-5" /> },
-                { label: "Speakers", icon: <Speaker className="w-5 h-5" /> },
-                { label: "Microphones", icon: <Mic className="w-5 h-5" /> },
-                { label: "Accessories", icon: <Music className="w-5 h-5" /> },
-              ].map((category, index) => (
-                <motion.div
-                  key={index}
-                  variants={item}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-blue-600/20 backdrop-blur-sm rounded-xl border border-white/10"></div>
-                  <button
-                    className="relative flex flex-col items-center justify-center p-4 w-full h-full text-white rounded-xl"
-                  >
-                    <div className="bg-white/10 p-3 rounded-full mb-2">
-                      {category.icon}
-                    </div>
-                    <span className="text-sm font-medium">{category.label}</span>
-                  </button>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+  
 
           {/* Account Section */}
           {token ? (
