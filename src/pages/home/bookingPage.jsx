@@ -84,7 +84,7 @@ export default function BookingPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="w-full min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-10 px-4 sm:px-6"
+            className="w-full min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-10 px-4 sm:px-6 text-gray-700"
         >
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
@@ -92,11 +92,13 @@ export default function BookingPage() {
                     variants={itemVariants}
                     className="text-center mb-10"
                 >
-                    <h1 className="text-4xl font-bold text-primary mb-2 flex items-center justify-center">
-                        <Music className="mr-3 h-8 w-8 text-accent" />
+                    <h1 className="text-4xl font-bold text-indigo-700 mb-2 flex items-center justify-center">
+                        <Music className="mr-3 h-8 w-8 text-indigo-600" />
                         <span>KV Audio Booking</span>
                     </h1>
-                    
+                    <p className="text-gray-600 max-w-md mx-auto">
+                        Select your dates and confirm your equipment rental
+                    </p>
                 </motion.div>
 
                 {/* Booking Progress */}
@@ -106,24 +108,24 @@ export default function BookingPage() {
                 >
                     <div className="flex items-center justify-between max-w-xl mx-auto">
                         <div className="flex flex-col items-center">
-                            <div className="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center">
                                 <ShoppingCart className="h-5 w-5" />
                             </div>
-                            <span className="mt-2 text-sm font-medium text-primary">Cart</span>
+                            <span className="mt-2 text-sm font-medium text-indigo-700">Cart</span>
                         </div>
-                        <div className="flex-1 h-1 bg-accent/30 mx-2"></div>
+                        <div className="flex-1 h-1 bg-indigo-300 mx-2"></div>
                         <div className="flex flex-col items-center">
-                            <div className="w-10 h-10 rounded-full bg-accent text-white flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center">
                                 <Calendar className="h-5 w-5" />
                             </div>
-                            <span className="mt-2 text-sm font-medium text-primary">Dates</span>
+                            <span className="mt-2 text-sm font-medium text-indigo-700">Dates</span>
                         </div>
-                        <div className="flex-1 h-1 bg-accent/30 mx-2"></div>
+                        <div className="flex-1 h-1 bg-indigo-300 mx-2"></div>
                         <div className="flex flex-col items-center">
                             <div className="w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center">
                                 <CreditCard className="h-5 w-5" />
                             </div>
-                            <span className="mt-2 text-sm font-medium text-gray-500">Payment</span>
+                            <span className="mt-2 text-sm font-medium text-gray-600">Payment</span>
                         </div>
                     </div>
                 </motion.div>
@@ -131,59 +133,58 @@ export default function BookingPage() {
                 {/* Date Selection Card */}
                 <motion.div 
                     variants={itemVariants}
-                    className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+                    className="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
                 >
-                    <h2 className="text-xl font-bold text-primary mb-6 flex items-center">
-                        <Calendar className="mr-2 h-6 w-6 text-accent" />
+                    <h2 className="text-xl font-bold text-indigo-700 mb-6 flex items-center">
+                        <Calendar className="mr-2 h-6 w-6 text-indigo-600" />
                         Select Rental Period
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="space-y-3">
                             <label className="block">
-                                <span className="text-primary font-medium flex items-center mb-2">
-                                    <Calendar className="mr-2 h-4 w-4 text-secondary" />
+                                <span className="text-gray-700 font-medium flex items-center mb-2">
+                                    <Calendar className="mr-2 h-4 w-4 text-indigo-500" />
                                     Starting Date
                                 </span>
                                 <input
                                     type="date"
                                     value={startingDate}
                                     onChange={(e) => setStartingDate(e.target.value)}
-                                    className="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                                    className="w-full bg-blue-50 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all text-gray-700"
                                 />
                             </label>
                         </div>
                         <div className="space-y-3">
                             <label className="block">
-                                <span className="text-primary font-medium flex items-center mb-2">
-                                    <Calendar className="mr-2 h-4 w-4 text-secondary" />
+                                <span className="text-gray-700 font-medium flex items-center mb-2">
+                                    <Calendar className="mr-2 h-4 w-4 text-indigo-500" />
                                     Ending Date
                                 </span>
                                 <input
                                     type="date"
                                     value={endingDate}
                                     onChange={(e) => setEndingDate(e.target.value)}
-                                    className="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                                    className="w-full bg-blue-50 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all text-gray-700"
                                 />
                             </label>
                         </div>
                     </div>
                     
-                    <div className="mt-6 p-4 bg-accent/5 rounded-lg border border-accent/10">
-                        <p className="text-primary font-medium flex items-center">
-                            <Clock className="mr-2 h-5 w-5 text-accent" />
+                    <div className="mt-6 p-4 bg-indigo-100 rounded-lg border border-indigo-200">
+                        <p className="text-gray-700 font-medium flex items-center">
+                            <Clock className="mr-2 h-5 w-5 text-indigo-600" />
                             Total Rental Period: 
-                            <span className="ml-2 font-bold text-accent">{daysBetween} day{daysBetween !== 1 ? 's' : ''}</span>
+                            <span className="ml-2 font-bold text-indigo-700">{daysBetween} day{daysBetween !== 1 ? 's' : ''}</span>
                         </p>
                     </div>
                 </motion.div>
 
-                {/* Cart Items */}
                 <motion.div 
                     variants={itemVariants}
-                    className="bg-white rounded-xl shadow-lg overflow-hidden border border-purple-100 mb-8 hover:shadow-xl transition-shadow duration-300"
+                    className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 mb-8 hover:shadow-lg transition-shadow duration-300"
                 >
-                    <div className="bg-purple-600 p-6 text-white">
+                    <div className="bg-indigo-500 p-6 text-white">
                         <h2 className="text-xl font-bold flex items-center">
                             <ShoppingCart className="mr-2 h-6 w-6" />
                             Your Equipment
@@ -192,15 +193,15 @@ export default function BookingPage() {
 
                     {cart.orderedItems.length === 0 ? (
                         <div className="p-10 text-center">
-                            <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-5">
-                                <ShoppingCart className="h-10 w-10 text-purple-500" />
+                            <div className="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                                <ShoppingCart className="h-10 w-10 text-indigo-500" />
                             </div>
-                            <h3 className="text-lg font-semibold text-purple-800 mb-2">Your cart is empty</h3>
+                            <h3 className="text-lg font-semibold text-gray-800 mb-2">Your cart is empty</h3>
                             <p className="text-gray-600 mb-6 max-w-md mx-auto">Add some audio equipment to your cart to create a booking.</p>
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="px-6 py-3 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition-colors shadow-md hover:shadow-lg flex items-center mx-auto"
+                                className="px-6 py-3 bg-indigo-500 text-white rounded-full font-medium hover:bg-indigo-600 transition-colors shadow-md hover:shadow-lg flex items-center mx-auto"
                                 onClick={() => window.history.back()}
                             >
                                 <ShoppingCart className="mr-2 h-5 w-5" />
@@ -209,21 +210,21 @@ export default function BookingPage() {
                         </div>
                     ) : (
                         <div>
-                            <div className="divide-y divide-purple-100">
+                            <div className="divide-y divide-gray-200">
                                 {cart.orderedItems.map((item, index) => (
                                     <motion.div 
                                         key={item.key}
-                                        whileHover={{ backgroundColor: "rgba(147, 51, 234, 0.05)" }}
-                                        className={`transition-colors ${index % 2 === 0 ? 'bg-purple-50/50' : 'bg-white'}`}
+                                        whileHover={{ backgroundColor: "rgba(99, 102, 241, 0.1)" }}
+                                        className={`transition-colors ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}
                                     >
                                         <BookingItem itemKey={item.key} qty={item.qty} refresh={reloadCart} />
                                     </motion.div>
                                 ))}
                             </div>
                             
-                            <div className="p-4 bg-purple-50 border-t border-purple-100">
-                                <p className="text-sm text-purple-700 text-center">
-                                    <span className="inline-block mr-2">✓</span>
+                            <div className="p-4 bg-indigo-50 border-t border-gray-200">
+                                <p className="text-sm text-gray-700 text-center">
+                                    <span className="inline-block mr-2 text-green-500">✓</span>
                                     All items are available for your selected dates
                                 </p>
                             </div>
@@ -234,25 +235,25 @@ export default function BookingPage() {
                 {/* Summary and Checkout */}
                 <motion.div 
                     variants={itemVariants}
-                    className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+                    className="bg-white rounded-xl shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300"
                 >
-                    <h2 className="text-xl font-bold text-primary mb-4 flex items-center">
-                        <CreditCard className="mr-2 h-6 w-6 text-accent" />
+                    <h2 className="text-xl font-bold text-indigo-700 mb-4 flex items-center">
+                        <CreditCard className="mr-2 h-6 w-6 text-indigo-600" />
                         Order Summary
                     </h2>
 
                     <div className="space-y-3 mb-6">
-                        <div className="flex justify-between items-center text-gray-600">
+                        <div className="flex justify-between items-center text-gray-700">
                             <span>Equipment Rental</span>
                             <span>Rs. {(total * 0.9).toFixed(2)}</span>
                         </div>
-                        <div className="flex justify-between items-center text-gray-600">
+                        <div className="flex justify-between items-center text-gray-700">
                             <span>Service Fee</span>
                             <span>Rs. {(total * 0.1).toFixed(2)}</span>
                         </div>
-                        <div className="border-t border-gray-100 pt-3 flex justify-between items-center font-bold text-primary">
-                            <span>Total Amount</span>
-                            <span className="text-2xl text-accent">Rs. {total.toFixed(2)}</span>
+                        <div className="border-t border-gray-200 pt-3 flex justify-between items-center font-bold">
+                            <span className="text-gray-800">Total Amount</span>
+                            <span className="text-2xl text-indigo-700">Rs. {total.toFixed(2)}</span>
                         </div>
                     </div>
                     
@@ -264,8 +265,8 @@ export default function BookingPage() {
                             onClick={handleBookingCreation}
                             className={`w-full py-4 rounded-lg font-medium text-white 
                                 ${cart.orderedItems.length === 0 
-                                    ? 'bg-gray-300 cursor-not-allowed' 
-                                    : 'bg-accent hover:bg-accent/90 shadow-lg hover:shadow-accent/20'} 
+                                    ? 'bg-gray-400 cursor-not-allowed' 
+                                    : 'bg-indigo-600 hover:bg-indigo-500 shadow-md hover:shadow-lg'} 
                                 transition-all duration-300 flex items-center justify-center`}
                         >
                             {isLoading ? (
@@ -283,10 +284,32 @@ export default function BookingPage() {
                                 </>
                             )}
                         </motion.button>
-                        
                         <p className="text-xs text-gray-500 text-center mt-4">
                             By confirming, you agree to our terms and conditions for equipment rental
                         </p>
+                    </div>
+                </motion.div>
+
+                {/* Additional Information */}
+            
+                <motion.div 
+                    variants={itemVariants}
+                    className="mt-8 text-center text-gray-600 text-sm"
+                >
+                    <p>Need help with your booking? Contact our support team at support@kvaudio.com</p>
+                    <div className="flex justify-center space-x-4 mt-4">
+                        <span className="flex items-center">
+                            <Clock className="h-4 w-4 mr-1 text-indigo-500" />
+                            24/7 Support
+                        </span>
+                        <span className="flex items-center">
+                            <CreditCard className="h-4 w-4 mr-1 text-indigo-500" />
+                            Secure Payment
+                        </span>
+                        <span className="flex items-center">
+                            <Calendar className="h-4 w-4 mr-1 text-indigo-500" />
+                            Flexible Dates
+                        </span>
                     </div>
                 </motion.div>
             </div>
