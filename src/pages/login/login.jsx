@@ -16,7 +16,7 @@ export default function LoginPage() {
   const googleLogin = useGoogleLogin({
     onSuccess: (res) => {
       setIsLoading(true);
-      axios.post("http://localhost:3000/api/users/google", {
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/google`, {
         accessToken: res.access_token
       }).then((res) => {
         toast.success("Login Success");
@@ -40,7 +40,7 @@ export default function LoginPage() {
   function handleOnSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    const backendUrl = "http://localhost:3000";
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
 
     axios.post(`${backendUrl}/api/users/login`, {
       email: email,
@@ -255,5 +255,3 @@ export default function LoginPage() {
 }
 
 
-
-//http://localhost:3000/api/users/login

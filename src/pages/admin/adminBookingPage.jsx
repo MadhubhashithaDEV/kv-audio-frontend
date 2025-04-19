@@ -15,7 +15,7 @@ export default function AdminOrdersPage() {
 			try {
 				const token = localStorage.getItem("token");
 				const res = await axios.get(
-					"http://localhost:3000/api/orders/",
+					`${import.meta.env.VITE_BACKEND_URL}/api/orders/`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export default function AdminOrdersPage() {
         const token = localStorage.getItem("token");
         
         axios.put(
-            "http://localhost:3000/api/orders/status/" + orderId,
+            `${import.meta.env.VITE_BACKEND_URL}/api/orders/status/${orderId}`,
             {
                 status: status,
             },

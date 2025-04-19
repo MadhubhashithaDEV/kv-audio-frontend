@@ -19,7 +19,7 @@ export default function Items() {
   const fetchProducts = () => {
     setState("Loading");
     axios
-      .get("http://localhost:3000/api/products")
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/products`)
       .then((res) => {
         setItems(res.data);
         

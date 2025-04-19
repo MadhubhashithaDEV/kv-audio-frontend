@@ -16,7 +16,7 @@ export default function ProductOverview() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/products/" + key)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${key}`)
       .then((res) => {
         setProduct(res.data);
         setLoadingStatus("loaded");

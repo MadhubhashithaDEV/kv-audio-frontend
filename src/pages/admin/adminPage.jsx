@@ -25,7 +25,7 @@ export default function AdminPage() {
     }
     
     setLoading(true);
-    axios.get("http://localhost:3000/api/users/", {
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

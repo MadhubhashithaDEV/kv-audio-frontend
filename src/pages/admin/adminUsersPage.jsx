@@ -14,7 +14,7 @@ export default function AdminUsersPage() {
       setIsRefreshing(true);
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        "http://localhost:3000/api/users/all",
+       `${import.meta.env.VITE_BACKEND_URL}/api/users/all`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ export default function AdminUsersPage() {
     const token = localStorage.getItem("token");
 
     axios.put(
-      "http://localhost:3000/api/users/block/" + email, {}, {
+     `${import.meta.env.VITE_BACKEND_URL}/api/users/block/${email}`, {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }

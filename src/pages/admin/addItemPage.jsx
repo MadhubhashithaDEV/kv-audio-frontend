@@ -54,7 +54,7 @@ export default function AddItemPage() {
       const imageUrls = await Promise.all(promises);
 
       const result = await axios.post(
-        "http://localhost:3000/api/products",
+       `${import.meta.env.VITE_BACKEND_URL}/api/products`,
         {
           key: productKey,
           name: productName,

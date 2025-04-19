@@ -24,7 +24,7 @@ export default function BookingPage() {
         cartInfo.startingDate = startingDate;
         cartInfo.endingDate = endingDate;
         cartInfo.days = daysBetween;
-        axios.post("http://localhost:3000/api/orders/quote", cartInfo)
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders/quote`, cartInfo)
             .then((res) => {
                 setTotal(res.data.total);
             }).catch((err) => {
@@ -44,7 +44,7 @@ export default function BookingPage() {
         cart.days = daysBetween;
 
         const token = localStorage.getItem("token");
-        axios.post("http://localhost:3000/api/orders", cart, {
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/orders`, cart, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

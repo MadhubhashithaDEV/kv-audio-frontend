@@ -11,7 +11,7 @@ export default function BookingItem({ itemKey, qty, refresh }) {
 	useEffect(() => {
 		if (status === "loading") {
 			axios
-				.get("http://localhost:3000/api/products/" + itemKey)
+				.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${itemKey}`)
 				.then((res) => {
 					setItem(res.data);
 					setStatus("success");

@@ -15,7 +15,7 @@ export default function VerifyEmail() {
 
     const sendOTP = () => {
         setResendLoading(true)
-        axios.get("http://localhost:3000/api/users/sendOTP", {
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/sendOTP`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -62,7 +62,7 @@ export default function VerifyEmail() {
         }
         
         setIsLoading(true)
-        axios.post("http://localhost:3000/api/users/verifyEmail", {
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/verifyEmail`, {
             code: parseInt(otp)
         }, {
             headers: {
